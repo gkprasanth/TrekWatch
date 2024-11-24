@@ -35,6 +35,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name='placedetails'  />
+        <Stack.Screen name='weather'  />
         <Stack.Screen name='index' options={{
           headerShown: false
         }}  />
