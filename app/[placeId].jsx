@@ -30,13 +30,64 @@ const PlaceDetails = () => {
     .flatMap((category) => category.places)
     .find((item) => item.id === placeId);
 
-  const geofenceCoordinates = [
+  // const geofenceCoordinates = [
+  //   { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude - 0.001 },
+  //   { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude + 0.001 },
+  //   { latitude: place.coordinates.latitude - 0.001, longitude: place.coordinates.longitude + 0.001 },
+  //   { latitude: place.coordinates.latitude - 0.001, longitude: place.coordinates.longitude - 0.001 },
+  //   { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude - 0.001 },
+  // ];
+
+
+  // const geofenceCoordinates = [
+  //   { latitude: 17.605045357131367, longitude: 78.48589531605934 },
+  //   { latitude: 17.605030656762537, longitude: 78.48580009763775 },
+  //   { latitude: 17.60530293289906, longitude: 78.48574310069507 },
+  //   { latitude: 17.60532977700259, longitude: 78.48584435408716 },
+  //   { latitude: 17.605045357131367, longitude: 78.48589531605934 },
+  // ];
+
+  let geofenceCoordinates;
+
+if (placeId === "cmrcet") {
+  geofenceCoordinates = [
+    { latitude: 17.605045357131367, longitude: 78.48589531605934 },
+    { latitude: 17.605030656762537, longitude: 78.48580009763775 },
+    { latitude: 17.60530293289906, longitude: 78.48574310069507 },
+    { latitude: 17.60532977700259, longitude: 78.48584435408716 },
+    { latitude: 17.605045357131367, longitude: 78.48589531605934 },
+  ];
+} else {
+  geofenceCoordinates = [
     { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude - 0.001 },
     { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude + 0.001 },
     { latitude: place.coordinates.latitude - 0.001, longitude: place.coordinates.longitude + 0.001 },
     { latitude: place.coordinates.latitude - 0.001, longitude: place.coordinates.longitude - 0.001 },
     { latitude: place.coordinates.latitude + 0.001, longitude: place.coordinates.longitude - 0.001 },
   ];
+}
+
+  
+
+
+  /**
+   * 
+   * 17.605045357131367, 78.48589531605934
+   * 
+   17.515120060993862, 78.34706566291985
+   17.515194878243594, 78.34713137704188
+   17.51517697326355, 78.3472165371796
+   17.515092564048192, 78.34715954023703
+    17.515120060993862, 78.34706566291985
+    
+
+
+    17.605097127972787, 78.48589799827036
+    17.605030656762537, 78.48580009763775
+    17.60530293289906, 78.48574310069507
+    17.60532977700259, 78.48584435408716
+    17.605097127972787, 78.48589799827036
+   */
 
   const isInsidePolygon = (point, polygon) => {
     const turfPoint = turf.point([point.longitude, point.latitude]);
@@ -133,6 +184,7 @@ const PlaceDetails = () => {
           latitudeDelta: 0.1,
           longitudeDelta: 0.1,
         }}
+        
       >
         <Marker
           coordinate={{
@@ -149,9 +201,12 @@ const PlaceDetails = () => {
       </MapView>
 
       <View style={styles.card}>
+      <Text style={styles.description}>{placeId}</Text>
         <Image source={{ uri: place.image }} style={styles.image} />
         <Text style={styles.title}>{place.place}</Text>
         <Text style={styles.description}>{place.description}</Text>
+
+      
 
         {loading ? (
           <Text style={styles.info}>Loading weather data...</Text>
@@ -263,7 +318,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#ff0000',
-    width:100,
+    width: 100,
     textAlign: 'center'
   },
   errorContainer: {
@@ -287,13 +342,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
- 
+
   returnToSafetyButton: {
     backgroundColor: 'green',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop:20
+    marginTop: 20
   },
   returnToSafetyText: {
     color: 'white',

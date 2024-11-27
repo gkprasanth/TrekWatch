@@ -15,8 +15,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
-        "permissions": ["ACCESS_FINE_LOCATION"]
-      }
+        "permissions": [
+          "ACCESS_FINE_LOCATION"
+        ]
+      },
+      "package": "com.gkprasanth.TrekWatch"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +40,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "941d8336-c464-456d-98e0-c318f60dbcb6"
+      }
     }
   }
 }
