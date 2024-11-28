@@ -1,33 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import BgSvg from '@/assets/images/bg.svg'; // Import the SVG component
 
 const Landing = () => {
     const router = useRouter();
 
     const handleStart = () => {
-        router.push('/home'); // Navigate to the Home page
+        router.push('/login'); // Navigate to the Home page
     };
 
     return (
         <ImageBackground
-            source={{ uri: 'https://static.vecteezy.com/system/resources/previews/030/318/046/non_2x/natures-marvel-active-tourist-on-rocks-admiring-lush-mountains-epitomizes-trekking-adventure-vertical-mobile-wallpaper-ai-generated-free-photo.jpg' }}
+            source={{
+                uri: 'https://s3-alpha-sig.figma.com/img/0f73/0d19/659bb8747b48cc972d6bd9f1054652b7?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Vn6QqKg9M7tzXOYcb6k3g1h28~2hCYsKNFUwRwhfWegNtNms2CTEfF2T~gHcUEL8dsrsAfcyq6gEix52PU~lM95QB4vsnksujzA42ayQKObuJCYJ0IYNKsZny4p0W--gm69nyn9fVfy7U1i5RtNYZRAoxMrcYX~xJE~dCIpvk~STgjyaeRidlhR4pzAHJBISIYAwRt3tigaTXUsyNngAWT5gmG1Myarz-uE8~T7x~eWbFPukBUcDhOzx3neiXNYIuho84fsJCP1DM9ggUDJt~FByGOdg0HNnpSl37E-b-zS~HsCJ~rA8AGq9qZrcdv81sGLLcSqA8bOEB2MxWvQUeA__',
+            }}
             style={styles.background}
         >
             <View style={styles.container}>
- 
-                <View style={styles.overlay}>
-                    <Text style={styles.title}>Welcome to TrekWatch</Text>
-                    <Text style={styles.subtitle}>
-                        Explore breathtaking destinations and unforgettable experiences.
-                    </Text>
-
-                    {/* Let's Start Button */}
-                    <TouchableOpacity style={styles.button} onPress={handleStart}>
-                        <Text style={styles.buttonText}>Let's Start</Text>
-                    </TouchableOpacity>
+                {/* Logo and Tagline */}
+                <View style={styles.header}>
+                    <Image source={require('../assets/images/logo.png')} style={styles.logo} />
+                    <Text style={styles.appName}>TREKWATCH</Text>
+                    <Text style={styles.tagline}>Explore || Protect || Rescue</Text>
                 </View>
+
+                {/* Let's Start Button */}
+                <TouchableOpacity style={styles.button} onPress={handleStart}>
+                    <Text style={styles.buttonText}>Let's Start</Text>
+                </TouchableOpacity>
             </View>
         </ImageBackground>
     );
@@ -36,45 +36,50 @@ const Landing = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
     },
     background: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-    },
-    overlay: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay to the background image
+        resizeMode: 'cover', // Ensures the background image covers the screen
+    },
+    header: {
         alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
+        marginTop: 60, // Positions the logo and text at the top
     },
-    title: {
-        fontSize: 36,
+    logo: {
+        width: 300, // Increased logo size
+        height: 150, // Increased logo size
+        
+    },
+    appName: {
+        fontSize: 32, // Large and bold for better visibility
         fontWeight: 'bold',
-        color: '#fff',
+        color: '#000', // Black text
         textAlign: 'center',
-        marginBottom: 16,
+        marginBottom: 5,
     },
-    subtitle: {
-        fontSize: 18,
-        color: '#ddd',
+    tagline: {
+        fontSize: 18, // Smaller tagline
+        color: '#000', // Black text
         textAlign: 'center',
-        marginBottom: 50,
     },
     button: {
-        backgroundColor: 'green',
-        borderRadius: 8,
-        paddingVertical: 12,
-        paddingHorizontal: 32,
+        backgroundColor: '#00CEC9', // Green button
+        borderRadius: 25, // Rounded button
+        paddingVertical: 15,
+        paddingHorizontal: 70, // Wide button
+        elevation: 5, // Add shadow for depth
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
         position: 'absolute',
-        bottom: 40,
-        alignSelf: 'center',
+        bottom: 60, // Button stays closer to the bottom
     },
     buttonText: {
-        fontSize: 18,
+        fontSize: 20, // Larger button text
         color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center',
